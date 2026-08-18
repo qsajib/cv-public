@@ -1,0 +1,277 @@
+\ProvidesFile{smqucv.bbx}
+  [2026/08/05 Bibliography style for SMQU's curriculum vitae]
+
+\RequireBibliographyStyle{trad-abbrv}
+
+% =========================================================
+% ModernCV-style bibliography layout
+% =========================================================
+%
+% The publication year appears in ModernCV's left-hand
+% hints column. The bibliographic record begins in the
+% main column.
+%
+
+\defbibenvironment{bibliography}
+  {\list
+     {\printfield{year}}
+     {%
+       \setlength{\labelwidth}{\hintscolumnwidth}%
+       \setlength{\labelsep}{\separatorcolumnwidth}%
+       \setlength{\leftmargin}{\labelwidth}%
+       \addtolength{\leftmargin}{\labelsep}%
+       \setlength{\rightmargin}{0pt}%
+       \setlength{\itemindent}{0pt}%
+       \setlength{\itemsep}{.25em}%
+       \setlength{\parsep}{0pt}%
+       \setlength{\topsep}{0pt}%
+       \renewcommand*{\makelabel}[1]{%
+         \hss\hintstyle{##1}}%
+     }}
+  {\endlist}
+  {\item}
+
+
+% =========================================================
+% Do not repeat dates within bibliography entries
+% =========================================================
+%
+% The year is already displayed in the left-hand column.
+%
+
+\renewbibmacro*{date}{}
+
+
+% =========================================================
+% Bold the CV author's name
+% =========================================================
+
+\newcommand*{\smqugiveninitials}{%
+  M\bibinitperiod\bibinitdelim
+  Q\bibinitperiod\bibinitdelim
+  U\bibinitperiod}
+
+\newcommand*{\ifsmquname}[2]{%
+  \ifboolexpr{
+    test {\ifdefstring{\namepartfamily}{Sajib}}
+    and
+    test {\ifdefstrequal
+      {\namepartgiveni}
+      {\smqugiveninitials}}
+  }
+    {#1}
+    {#2}}
+
+\renewcommand*{\mkbibnamegiven}[1]{%
+  \ifsmquname{\mkbibbold{#1}}{#1}}
+
+\renewcommand*{\mkbibnamefamily}[1]{%
+  \ifsmquname{\mkbibbold{#1}}{#1}}
+
+\renewcommand*{\mkbibnameprefix}[1]{%
+  \ifsmquname{\mkbibbold{#1}}{#1}}
+
+\renewcommand*{\mkbibnamesuffix}[1]{%
+  \ifsmquname{\mkbibbold{#1}}{#1}}
+
+
+% =========================================================
+% Compact bibliographic labels
+% =========================================================
+%
+% The trailing thin space is part of each label so that
+% spacing remains uniform wherever the label is used.
+%
+
+\newcommand*{\vollabel}{vol.\,}
+\newcommand*{\chaplabel}{chap.\,}
+\newcommand*{\edlabel}{ed.}
+\newcommand*{\pplabel}{pp.\,}
+\newcommand*{\artidlabel}{art.\,id.\,}
+
+
+% Entry-type-specific field formats
+%
+% Journal volumes remain unlabelled:
+%   Sensors 20(6)
+%
+% Proceedings/series volumes are labelled:
+%   vol. 421
+%
+
+\DeclareFieldFormat[inproceedings]{volume}{%
+  \vollabel#1}
+
+\DeclareFieldFormat[incollection]{volume}{%
+  \vollabel#1}
+
+\DeclareFieldFormat[inbook]{volume}{%
+  \vollabel#1}
+
+\DeclareFieldFormat[incollection]{chapter}{%
+  \chaplabel#1}
+
+\DeclareFieldFormat[inbook]{chapter}{%
+  \chaplabel#1}
+
+\DeclareFieldFormat{edition}{%
+  \ifinteger{#1}
+    {\mkbibordedition{#1}\space\edlabel}
+    {#1\space\edlabel}}
+    
+% Use pp. for page ranges throughout the publication list.
+\DeclareFieldFormat{pages}{%
+  \pplabel#1}
+
+% Ensure article page ranges use the same format.
+\DeclareFieldFormat[article]{pages}{%
+  \pplabel#1}
+
+% Electronic article numbers.
+\DeclareFieldFormat[article]{eid}{%
+  \artidlabel#1}
+
+% Electronic article numbers.
+\DeclareFieldFormat[article]{eid}{%
+  \artidlabel#1}
+
+
+% =========================================================
+% DOI and URL formatting
+% =========================================================
+%
+% The main .tex file must contain:
+%
+%   \colorlet{cvidentifier}{black!80}
+%
+
+\newcommand*{\smqucvlabel}[1]{%
+  {\sffamily
+   \addfontfeatures{Letters=SmallCaps}%
+   \color{cvidentifier}#1}}
+
+\newcommand*{\smqucvidentifier}[1]{%
+  {\sffamily
+   \color{cvidentifier}#1}}
+
+\DeclareFieldFormat{doi}{%
+  \smqucvlabel{doi}\thinspace
+  \href{https://doi.org/#1}{%
+    \smqucvidentifier{#1}}}
+
+% \DeclareFieldFormat{url}{%
+%   \smqucvlabel{url}\thinspace
+%   \href{#1}{%
+%     \smqucvidentifier{#1}}}
+
+% Keep the complete URL in usera, then remove the scheme
+% from the URL field used for printed output.
+\DeclareSourcemap{
+  \maps[datatype=bibtex]{
+    \map{
+      \step[
+        fieldsource=url,
+        match=\regexp{\Ahttps://},
+        replace={}
+      ]
+    }
+  }
+}
+
+\DeclareFieldFormat{url}{%
+  \smqucvlabel{url}\thinspace
+  \href{https://#1}{%
+    \smqucvidentifier{#1}}}
+
+% The complete DOI/URL presentation is controlled by the
+% field formats above.
+\renewbibmacro*{doi+eprint+url}{%
+  \iftoggle{bbx:doi}
+    {\printfield{doi}}
+    {}%
+  \newunit\newblock
+  \iftoggle{bbx:eprint}
+    {\usebibmacro{eprint}}
+    {}%
+  \newunit\newblock
+  \iftoggle{bbx:url}
+    {\usebibmacro{url+urldate}}
+    {}}
+
+
+% Suppress a URL when a DOI is already available.
+\AtEveryBibitem{%
+  \iffieldundef{doi}
+    {}
+    {\clearfield{url}}%
+}
+
+
+% =========================================================
+% Suppress redundant conference metadata
+% =========================================================
+%
+% The proceedings title already identifies the conference,
+% so event title, venue, and event date are unnecessary in
+% this CV bibliography.
+%
+
+\AtEveryBibitem{%
+  \ifentrytype{inproceedings}
+    {%
+      \clearfield{eventtitle}%
+      \clearfield{eventtitleaddon}%
+      \clearfield{venue}%
+      \clearfield{eventyear}%
+      \clearfield{eventmonth}%
+      \clearfield{eventday}%
+    }
+    {}%
+}
+
+% =========================================================
+% Omit publisher locations in the CV
+% =========================================================
+
+\AtEveryBibitem{%
+  \clearlist{location}%
+}
+
+
+% =========================================================
+% Journal article formatting
+% =========================================================
+%
+% Produces forms such as:
+%
+%   Sensors 20(6), art. id. 1778.
+%   TUGboat 40(3), pp. 263--269.
+%
+
+\renewbibmacro*{journal+issuetitle}{%
+  \usebibmacro{journal}%
+  \setunit{\addspace}%
+  \iffieldundef{series}
+    {}
+    {%
+      \printfield{series}%
+      \setunit{\addspace}%
+    }%
+  \usebibmacro{volume+number+pages+eid}%
+  \setunit*{\addcolon\space}%
+  \usebibmacro{issue}%
+  \newunit}
+
+
+\renewbibmacro*{volume+number+pages+eid}{%
+  \printfield{volume}%
+  \setunit*{\volumenumberdelim}%
+  \printfield{number}%
+  \newcommaunit
+  \printfield{pages}%
+  \newcommaunit
+  \printfield{eid}%
+}
+
+
+\endinput

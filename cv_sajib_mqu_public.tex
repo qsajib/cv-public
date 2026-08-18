@@ -1,0 +1,418 @@
+% ============================================================
+% Public CV
+%
+% Copyright (c) 2026 Md Qutub Uddin Sajib.
+%
+% The LaTeX code and formatting may be reused under the MIT
+% License. The personal, biographical, academic, employment,
+% publication, and other CV content is not covered by that
+% license and remains all rights reserved.
+%
+% See LICENSE for details.
+%
+% This source is intended for public distribution.
+% Private contact information and referee details are omitted.
+%
+% Keep this file as the canonical source for the public CV.
+%
+% ============================================================
+% Contact Information
+% Professional Profile
+% Research Interests
+% Education
+% Research Experience
+% Professional Experience
+% Publications
+% Skills
+% Technical Contributions
+% Community Engagement
+% References
+% ============================================================
+
+\documentclass[11pt,a4paper,sans]{moderncv}
+
+\definecolor{color0}{rgb}{0,0,0}% main text color
+\definecolor{color1}{RGB}{73,124,56}% highlight color
+\definecolor{color2}{rgb}{0.25,0.28,0.3}
+\definecolor{color3}{rgb}{0,0,0}% tertiary scheme color
+
+\AtBeginDocument{%
+  \colorlet{firstnamecolor}{color0}%
+  \colorlet{lastnamecolor}{color0}%
+}
+
+\moderncvstyle{classic}
+\usepackage[
+  scale=0.83,
+  top=1.8cm,
+  bottom=1.8cm
+]{geometry}
+\usepackage{xcolor}
+\colorlet{hintstylecolor}{black!85}
+
+\let\fax\relax
+\usepackage{marvosym} % \Letter, \Telefon etc. symbols
+\usepackage{academicons}% google scholar icon
+\usepackage{metalogo}
+\usepackage{fontspec}
+\setsansfont[Ligatures = TeX, Numbers=Lining]{Libertinus Sans}
+
+\renewcommand{\familydefault}{\sfdefault}
+
+\setmonofont[
+   Scale = MatchLowercase
+   ]{Libertinus Mono}
+
+\newfontfamily\cvsmallcapsfont[
+  Ligatures = TeX,
+  Letters = SmallCaps
+  ]{Libertinus Sans}
+
+\colorlet{cvidentifier}{black!80}
+
+\usepackage[
+  backend=biber,
+  bibstyle=smqucv,
+  citestyle=trad-abbrv,
+  sorting=ydnt,
+  maxbibnames=99,
+  doi=true,
+  url=true,
+  isbn=false
+  ]{biblatex}
+  
+\addbibresource{bibliography/publications.bib}
+  
+%-----------------------------------------------------------------------
+%	NAME AND CONTACT INFORMATION SECTION
+%-----------------------------------------------------------------------
+
+\firstname{MD QUTUB UDDIN}
+\familyname{SAJIB, {Ph.D.}}
+\renewcommand*{\namefont}{\fontsize{22}{24}\mdseries\upshape}
+
+\title{Curriculum Vitae}
+\email{qsajib71@gmail.com} 
+
+\extrainfo{%
+  \faGithub
+  \href{https://github.com/qsajib}{\ \,GitHub}
+  \quad
+  \faLinkedin\href{https://www.linkedin.com/in/md-qutub-uddin-sajib}{\ \,LinkedIn}
+  \quad
+  \aiGoogleScholarSquare\href{https://scholar.google.com/citations?user=8kXG-uAAAAAJ}{\ \,Google Scholar}%
+    }
+    
+\def\emdash{\unskip\thinspace---\hskip.16667em\ignorespaces}
+
+% Unified CV bullet symbol
+\newcommand*{\cvbulletsymbol}{%
+  \raisebox{0.1ex}{%
+    \scalebox{1.05}{$\textcolor{color1}{\circ}$}}}
+
+% Bullet text with hanging indent
+\newcommand*{\cvbullettext}[1]{%
+  \parbox[t]{\linewidth}{%
+    \hangindent=.75em
+    \hangafter=1
+    \makebox[.75em][l]{\cvbulletsymbol}%
+    \ignorespaces#1}}
+
+% Breakable bullet item in ModernCV's main column
+\newcommand*{\cvbulletitem}[1]{%
+  \cvitem[.12em]{}{%
+    \cvbullettext{#1}}}
+
+\usepackage{etoolbox}
+
+\newbool{firstcvbullet}
+
+\newcommand*{\cvbullet}[1]{%
+  \ifbool{firstcvbullet}
+    {\boolfalse{firstcvbullet}}
+    {\addvspace{.12em}}%
+  \cvitem[0em]{}{%
+    \cvbullettext{#1}}%
+}
+
+\newenvironment{cvbulletlist}
+  {\booltrue{firstcvbullet}}
+  {\par\addvspace{.13em}}
+
+\usepackage{needspace}
+  
+%------------------------------------------------------------------
+\begin{document}
+
+\makecvtitle % Print the CV title
+
+\setlength{\hintscolumnwidth}{3.4cm} 
+\recomputelengths
+
+
+%------------------------------------------------------------------
+%	PROFESSIONAL PROFILE  SECTION
+%------------------------------------------------------------------
+
+\section{Professional Profile}
+
+\cvitem{}{Environmental scientist with a Ph.D.\ in Environmental
+  Science and Engineering and research experience in remote sensing,
+  land surface temperature modeling, GIS, and environmental data
+  analysis.  Following completion of my doctorate, I spent six years at
+  Mathematical Sciences Publishers, contributing to scholarly publishing
+  workflows, software development, and \LaTeX-based production systems.
+  My research and professional interests include environmental data
+  science, geospatial analysis, open-source scientific software,
+  digital typography, and scholarly publishing.}
+
+
+%------------------------------------------------------------------
+%	RESEARCH INTERESTS SECTION
+%------------------------------------------------------------------
+
+\section{Research Interests}
+
+\cvitem{}{%
+  \begin{tabular}{%
+    @{}
+    p{0.47\linewidth}
+    @{\hspace{1.5em}}
+    p{0.47\linewidth}
+    @{}
+  }
+    \cvbullettext{Environmental data science}
+      & \cvbullettext{Scientific computing}\\
+    \cvbullettext{Remote sensing and geospatial analysis}
+      & \cvbullettext{Open-source scientific software}\\
+    \cvbullettext{Environmental modeling}
+      & \cvbullettext{Scholarly publishing, digital typography}
+  \end{tabular}}
+
+
+%------------------------------------------------------------------
+%	EDUCATION SECTION
+%------------------------------------------------------------------
+
+\section{Education}
+
+\cventry{Sep.\,2014--Jun.\,2020}{Doctor of Philosophy (Ph.D.)
+  in Environmental Science and Engineering}{}{}{}{}
+\cvitem{}{\href{http://en.cug.edu.cn/cug/}{China University of Geosciences}, Wuhan, China}
+
+\cventry{\textbf{Dissertation}}{\normalfont\itshape Comparative Study of Land Surface Temperature
+  from Landsat~8 in Chandina, Bangladesh}{}{}{}{}
+
+\cventry[.5em]{\textbf{Advisor}}{Dr.\ Tao Wang}{Professor}{School of Environmental Studies}{}{}
+
+\cventry{Jul.\,2011--Jun.\,2012}{Master of Science (M.S.) in Environmental Science}{}{}{}{}
+
+\cvitem{}{\href{http://www.du.ac.bd/}{University of Dhaka}, Dhaka, Bangladesh}
+
+\cventry{\textbf{Thesis}}{\normalfont\itshape Identification and Assessment of
+        Land Use and Land Cover Changes
+        Using Remote Sensing and GIS Techniques
+        at Kaaultia Union of Gazipur, Bangladesh}{}{}{}{}
+
+\cventry[.5em]{\textbf{Advisor}}{Dr.\ A.S.M.\ Mohiuddin}{Professor}{Department of Soil, Water, and Environment}{}{}
+
+\cventry{Jul.\,2004--Jun.\,2010}{Bachelor of Science with Honors}{}{}{}{}
+
+\cvitem{}{\href{http://www.du.ac.bd/}{University of Dhaka}, Dhaka, Bangladesh}
+
+\cventry{\textbf{Project}}{\normalfont\itshape Green Technology}{}{}{}{}
+
+\cventry{\textbf{Advisor}}{Dr.\ M.\ Shafiqur Rahman}{Professor}{Department of Soil, Water, and Environment}{}{}
+
+
+%------------------------------------------------------------------
+%	RESEARCH EXPERIENCE SECTION
+%------------------------------------------------------------------
+
+\section{Research Experience}
+
+\cvitem{Sep.\,2014--Jun.\,2020}{\textbf{Doctoral Research}}
+\cvitem{}{China University of Geosciences, Wuhan, China}
+
+\cvitem{}{%
+  Conducted doctoral research in remote sensing and environmental
+  modeling, focusing on land surface temperature (LST) estimation
+  from Landsat 8 imagery.}
+
+\begin{cvbulletlist}
+
+\cvbullet{Performed remote sensing analysis of Landsat 8 imagery
+  using ENVI to estimate LST.}
+
+\cvbullet{Processed vector data and conducted spatial analysis
+  using ArcGIS.}
+
+\cvbullet{Compared four LST estimation algorithms and evaluated
+  their performance.}
+
+\cvbullet{Developed well-documented, reusable R scripts for statistical analysis, comparison of LST algorithms, and publication-quality visualization; included representative code examples in the dissertation to promote reproducible research.}
+
+\cvbullet{Published the research in a peer-reviewed journal.}
+
+\end{cvbulletlist}
+
+\Needspace{4\baselineskip}
+\cvitem{Jul.\,2011--Jun.\,2012}{\textbf{Master's Research}}
+\cvitem{}{University of Dhaka, Dhaka, Bangladesh}
+
+\cvitem{}{%
+  Conducted master's research on land-use and land-cover (LULC) change using remote sensing and GIS techniques.}
+
+\begin{cvbulletlist}
+  
+\cvbullet{Investigated LULC change using multi-temporal satellite imagery.}
+
+\cvbullet{Performed spatial analysis and thematic mapping using GIS.}
+
+\cvbullet{Evaluated environmental changes through satellite image interpretation.}
+
+\end{cvbulletlist}
+
+
+%------------------------------------------------------------------
+%	PROFESSIONAL EXPERIENCE SECTION
+%------------------------------------------------------------------
+
+\section{Professional Experience}
+
+\cventry{Jun.\,2020--Jun.\,2026}{Production Editor}{}{}{}{}
+
+\cvitem{}{%
+  \href{https://www.msp.org}{%
+    \textbf{Mathematical Sciences Publishers (MSP)}}%
+  \textbf{, Berkeley, California (Remote)}}
+
+\begin{cvbulletlist}
+  \cvbullet{%
+  Contributed to scholarly publishing through technical editing, production, and workflow optimization.}
+
+\cvbullet{%
+  Copyedited research articles across multiple mathematical
+  disciplines for publication.}
+
+\cvbullet{%
+  Developed enhancements to \LaTeX{} journal class files to
+  improve publication workflows.}
+
+\cvbullet{%
+  Identified software issues in production scripts and provided
+  technical feedback that contributed to workflow improvements.}
+
+\cvbullet{%
+  Collaborated with the production team to improve the journal
+  publication system.}
+\end{cvbulletlist}
+
+\vspace{.25\baselineskip} % add vertical space
+\cvitem[.5em]{\textbf{Supervisors}}{\textbf{Silvio Levy} (2020--2025); 
+    \textbf{John Bourke} (2025--2026)}
+
+\cventry{Jun.\,2012--Aug.\,2014}{\textbf{Assistant Coordinator (Publication)}}{}{}{}{}
+
+\cvitem{}{%
+  \href{https://www.chhayanaut.org/}{%
+    \textbf{Chhayanaut}}%
+  \textbf{, Dhaka (On-site)}}
+
+\begin{cvbulletlist}
+
+ \cvbullet{Managed production of the quarterly
+   \textit{Bangladesher Hridoy Hotey}.}
+
+ \cvbullet{Established and managed an in-house production workflow,
+   replacing the previous outsourced process.}
+
+ \cvbullet{Liaised with authors, coordinated proofs,
+  and ensured delivery of final printed copies.}
+
+ \cvbullet{Coordinated editorial schedules and workflows.}
+
+ \cvbullet{Organized monthly editorial board meetings.}
+
+\end{cvbulletlist}
+
+\vspace{.25\baselineskip} % add vertical space
+\cvitem{\textbf{Supervisor}}{\textbf{Prof.\ Dr.\ Sanjida Khatun}}{}{}
+
+
+%------------------------------------------------------------------
+%	PUBLICATIONS SECTION
+%------------------------------------------------------------------
+
+\section{Publications}
+
+\nocite{*}
+
+\printbibliography[
+  heading=subbibliography,
+  title={Journal Article},
+  keyword=journal-article
+]
+
+\printbibliography[
+  heading=subbibliography,
+  title={Peer-Reviewed Conference Proceedings},
+  keyword=conference-proceeding
+]
+
+\printbibliography[
+  heading=subbibliography,
+  title={Book Chapters},
+  keyword=book-chapter
+]
+
+\printbibliography[
+  heading=subbibliography,
+  title={TUGboat Article},
+  keyword=tugboat
+]
+  
+
+%------------------------------------------------------------------
+%	SKILLS SECTION
+%------------------------------------------------------------------
+
+\section{Skills}
+
+\cvitem{Programming}{Python, Perl}
+\cvitem{Computing}{Linux, Emacs}
+\cvitem{Statistical, Geospatial}{R, QGIS, ArcGIS, ENVI, ERDAS Imagine}
+\cvitem{Digital Typography}{\TeX, \LaTeX, \XeLaTeX, \LuaLaTeX}
+\cvitem{Scientific Publishing}{Journal production, workflow development, technical copyediting}
+
+\section{Technical Contributions}
+
+\cvitem{Open-Source}{Development of open-source tools for high-quality typesetting of the Bangla script with \XeLaTeX{} and \LuaLaTeX.}
+
+\cvitem{Production}{Contributed to journal production workflows and \LaTeX{} class file improvements at MSP.}
+
+\cvitem{Text Rendering}{Investigated Bangla text rendering in Unicode \TeX{} engines, contributing
+to technical discussions with HarfBuzz maintainers and \TeX{} developers.}
+
+\cvitem{\href{https://www.banglafinetype.org/}{BanglaFineType}}{Founder and developer of \href{https://www.banglafinetype.org/}{BanglaFineType}, an open initiative focused on the fine points of Bangla typography through research, engineering, education, and scholarly publishing.}
+
+
+%------------------------------------------------------------------
+%	COMMUNITY ENGAGEMENT SECTION
+% -----------------------------------------------------------------
+
+\section{Community Engagement}
+
+\subsection{\href{https://www.gunijan.org.bd/}{Gunijan}}
+
+\cventry{Jun.\,2011--Aug.\,2013}{\textit{Researcher and Writer}}{}{}{}{Conducted biographical research and authored short biographies in Bangla of seven eminent personalities of Bangladesh for the Gunijan digital archive.}
+
+\subsection{\href{https://www.du.ac.bd/}{University of Dhaka}}
+
+\cventry{Jul.\,2005--Jan.\,2006}{\textit{Student Assistant}}{}{}{}{Served as a student assistant at the Science Library, University of Dhaka.}
+
+\section{References}
+
+\cvitem{}{Academic and professional references are available upon request.}
+
+\end{document}
